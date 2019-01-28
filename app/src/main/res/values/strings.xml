@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MusicApp</string>
+    <string name="add_playlist_mssg">Enter Playlist Title</string>
 </resources>

@@ -1,56 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5sp"
+        android:paddingRight="10sp"
+        app:srcCompat="@drawable/ic_library_music_pink_48dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/trackTitle"
+            android:id="@+id/playlistTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Title"
             android:fontFamily="monospace"
-            android:text="Track 1"
+            android:text="Playlist Test"
             android:paddingBottom="5sp"
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/trackArtist"
+            android:id="@+id/numTrackItems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Caption"
             android:fontFamily="monospace"
-            android:text="Artist 1"
+            android:text="10 tracks"
             android:textSize="10sp"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/trackDuration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Caption"
-        android:fontFamily="monospace"
-        android:layout_weight="0.8"
-        android:textAlignment="viewEnd"
-        android:paddingTop="10sp"
-        android:text="5:50"
-        android:textSize="10sp"/>
-
-    <TextView
         android:id="@+id/itemOptions"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:textAlignment="viewEnd"
         android:paddingTop="10sp"
         android:text="&#8942;"
-        />
-
+    />
 
 </LinearLayout>
