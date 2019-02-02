@@ -2,6 +2,7 @@ package com.diaze.musicapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +10,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import java.util.Random;
 
 import com.diaze.musicapp.Adapters.PlayListsAdapter;
 import com.diaze.musicapp.Entities.Playlist;
@@ -22,7 +25,7 @@ import java.util.List;
 public class PlayListsActivity extends AppCompatActivity implements PlayListsAdapter.PlayListItemClickListener{
 
     private PlayListsAdapter mAdapter;
-    private RecyclerView mPlayLists;
+    private RecyclerView rv;
     List<Playlist> playLists = new ArrayList<>();
     private FloatingActionButton addPlaylist;
 
@@ -33,17 +36,17 @@ public class PlayListsActivity extends AppCompatActivity implements PlayListsAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_lists);
 
-        mPlayLists = (RecyclerView)findViewById(R.id.rv_playlist);
+        rv = (RecyclerView)findViewById(R.id.rv_playlist);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mPlayLists.setLayoutManager(linearLayoutManager);
-        mPlayLists.setHasFixedSize(true);
-        mPlayLists.addItemDecoration(new DividerItemDecoration(this,
+        rv.setLayoutManager(linearLayoutManager);
+        rv.setHasFixedSize(true);
+        rv.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
 
         populate();
 
         mAdapter = new PlayListsAdapter(playLists,this);
-        mPlayLists.setAdapter(mAdapter);
+        rv.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         addPlaylist = findViewById(R.id.addPlaylist);
 
@@ -61,7 +64,14 @@ public class PlayListsActivity extends AppCompatActivity implements PlayListsAda
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String title = input.getText().toString();
-                        playLists.add(new Playlist(title,0));
+                        int randomId;
+                        while (true){
+                            randomId = new Random().nextInt(10000);
+                            if (!checkIfIdExists(randomId))
+                                break;
+                        }
+
+                        playLists.add(new Playlist(randomId,title,0));
                         mAdapter.notifyDataSetChanged();
                     }
                 });
@@ -77,6 +87,15 @@ public class PlayListsActivity extends AppCompatActivity implements PlayListsAda
 
             }
         });
+    }
+
+    public boolean checkIfIdExists(int randomId){
+        for (int i=0;i<playLists.size(); i++){
+            if (playLists.get(i).getId() == randomId){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void populate(){
@@ -127,17 +146,17 @@ public class PlayListsActivity extends AppCompatActivity implements PlayListsAda
         playLists.add(p22);
     }
 
-
     @Override
     public void onListItemClick(int index) {
+        Intent startChildActivity = new Intent(this,TrackListActivity.class);
+        startChildActivity.putExtra("id",playLists.get(index).getId());
+        startChildActivity.putExtra("title",playLists.get(index).getTitle());
+        startActivity(startChildActivity);
     }
-
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
     }
 
 }

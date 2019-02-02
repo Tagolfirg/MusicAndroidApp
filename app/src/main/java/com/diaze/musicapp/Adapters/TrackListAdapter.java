@@ -65,8 +65,7 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.Trac
         void bind(int position){
             title.setText(tracks.get(position).getTitle());
             artist.setText(tracks.get(position).getArtist());
-            duration.setText(tracks.get(position).getDuration());
+            duration.setText(tracks.get(position).getFormattedTime());
         }
-
     }
 }

@@ -8,4 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DarkAppTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary"></item>
+        <item name="colorPrimaryDark"></item>
+        <item name="colorAccent"></item>
+    </style>
+
+    <style name="OceanAppTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary"></item>
+        <item name="colorPrimaryDark"></item>
+        <item name="colorAccent"></item>
+    </style>
+
+    <style name="ForestAppTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary"></item>
+        <item name="colorPrimaryDark"></item>
+        <item name="colorAccent"></item>
+    </style>
+
 </resources>

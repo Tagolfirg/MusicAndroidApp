@@ -15,7 +15,7 @@ import java.util.List;
 public class PlayListsAdapter extends RecyclerView.Adapter<PlayListsAdapter.PlaylistViewHolder> {
 
     private List<Playlist> playLists;
-    PlayListItemClickListener mOnClickListener;
+    private final PlayListItemClickListener mOnClickListener;
 
     public interface PlayListItemClickListener{
         void onListItemClick(int index);
@@ -58,6 +58,7 @@ public class PlayListsAdapter extends RecyclerView.Adapter<PlayListsAdapter.Play
             super(itemView);
             title = (TextView)itemView.findViewById(R.id.playlistTitle);
             numOfTracks = (TextView)itemView.findViewById(R.id.numTrackItems);
+            itemView.setOnClickListener(this);
         }
 
         void bind(int position){

@@ -6,9 +6,11 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.diaze.musicapp.Daos.PlaylistDAO;
+import com.diaze.musicapp.Daos.TrackDAO;
 import com.diaze.musicapp.Entities.Playlist;
+import com.diaze.musicapp.Entities.Track;
 
-@Database(entities = {Playlist.class}, version = 1, exportSchema = false)
+@Database(entities = {Playlist.class, Track.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
@@ -28,5 +30,7 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract PlaylistDAO playlistDAO();
+
+    public abstract TrackDAO trackDAO();
 
 }

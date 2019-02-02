@@ -7,19 +7,23 @@ import android.arch.persistence.room.PrimaryKey;
 public class Track {
 
     @PrimaryKey
-            private int id;
+            private long id;
 
     private String title;
     private String artist;
     private String album;
-    private String duration;
-    private String filePath;
+    private long duration;
 
-    public Track(String title, String artist, String album, String duration){
+    public Track(long id, String title, String artist, String album, long duration){
+        this.id = id;
         this.title = title;
         this.artist = artist;
         this.album = album;
         this.duration = duration;
+    }
+
+    public long getId(){
+        return id;
     }
 
     public String getTitle(){
@@ -34,7 +38,27 @@ public class Track {
         return album;
     }
 
-    public String getDuration(){
+    public long getDuration(){
         return duration;
     }
+
+    public long getDurationMilliseconds(){
+        return duration;
+    }
+
+    public long getDurationSeconds(){
+        return duration/1000;
+    }
+
+    public String getFormattedTime(){
+        int m = (int) (getDurationSeconds()/60);
+        int s = (int)(getDurationSeconds()%60);
+
+            if (s < 10){
+                return m+":0"+s;
+            }else{
+                return m+":"+s;
+            }
+    }
+
 }

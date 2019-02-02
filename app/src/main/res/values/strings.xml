@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">MusicApp</string>
     <string name="add_playlist_mssg">Enter Playlist Title</string>
+
+    <string name="action_settings">Action Settings</string>
+
+    <string name="pref_theme_dark" translatable="false">Dark</string>
+    <string name="pref_theme_light" translatable="false">Light</string>
+    <string name="pref_theme_ocean" translatable="false">Ocean</string>
+    <string name="pref_theme_forest" translatable="false">Forest</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -4,4 +4,18 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#d81b60</color>
 
+    <!--Value in SharedPreferences -->
+
+    <color name="pref_color_theme_dark_text">#FFFFFF</color>
+    <color name="pref_color_theme_dark_background">#202020</color>
+
+    <color name="pref_color_theme_light_text">#000000</color>
+    <color name="pref_color_theme_light_background">#FFFFFF</color>
+
+    <color name="pref_color_theme_ocean_text">#FFFFFF</color>
+    <color name="pref_color_theme_ocean_background">#005e97</color>
+
+    <color name="pref_color_theme_forest_text">#FFFFFF</color>
+    <color name="pref_color_theme_forest_background">#0d370d</color>
+
 </resources>
