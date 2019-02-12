@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/pref_color_theme_ocean_text"
         android:text=" ~ Audio Player Menu ~ "/>
 
 </LinearLayout>

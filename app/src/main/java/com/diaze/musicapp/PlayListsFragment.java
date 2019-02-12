@@ -1,60 +1,88 @@
 package com.diaze.musicapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import java.util.Random;
 
 import com.diaze.musicapp.Adapters.PlayListsAdapter;
 import com.diaze.musicapp.Entities.Playlist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class PlayListsActivity extends AppCompatActivity implements PlayListsAdapter.PlayListItemClickListener{
+public class PlayListsFragment extends Fragment  implements PlayListsAdapter.PlayListItemClickListener{
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     private PlayListsAdapter mAdapter;
     private RecyclerView rv;
     List<Playlist> playLists = new ArrayList<>();
     private FloatingActionButton addPlaylist;
 
-    private static final String TAG = PlayListsActivity.class.getSimpleName();
+    private OnFragmentInteractionListener mListener;
+
+    public PlayListsFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_lists);
+        populate();
+    }
 
-        rv = (RecyclerView)findViewById(R.id.rv_playlist);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_playlists, container, false);
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    public void initRecyclerView(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rv.setLayoutManager(linearLayoutManager);
         rv.setHasFixedSize(true);
-        rv.addItemDecoration(new DividerItemDecoration(this,
+        rv.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
+    }
 
-        populate();
-
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        rv = (RecyclerView)getView().findViewById(R.id.rv_playlist);
+        initRecyclerView();
         mAdapter = new PlayListsAdapter(playLists,this);
         rv.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-        addPlaylist = findViewById(R.id.addPlaylist);
-
+        addPlaylist = getView().findViewById(R.id.addPlaylist);
         addPlaylist.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(PlayListsActivity.this);
-                final EditText input = new EditText(PlayListsActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final EditText input = new EditText(getContext());
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
 
                 builder.setView(input);
@@ -87,6 +115,7 @@ public class PlayListsActivity extends AppCompatActivity implements PlayListsAda
 
             }
         });
+        super.onViewCreated(view, savedInstanceState);
     }
 
     public boolean checkIfIdExists(int randomId){
@@ -96,6 +125,23 @@ public class PlayListsActivity extends AppCompatActivity implements PlayListsAda
             }
         }
         return false;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     public void populate(){
@@ -148,15 +194,12 @@ public class PlayListsActivity extends AppCompatActivity implements PlayListsAda
 
     @Override
     public void onListItemClick(int index) {
-        Intent startChildActivity = new Intent(this,TrackListActivity.class);
-        startChildActivity.putExtra("id",playLists.get(index).getId());
-        startChildActivity.putExtra("title",playLists.get(index).getTitle());
-        startActivity(startChildActivity);
+        Playlist playlistSelected = playLists.get(index);
+        int id = playlistSelected.getId();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
-
 }

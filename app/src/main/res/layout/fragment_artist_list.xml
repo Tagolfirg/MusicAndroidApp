@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PlayListsActivity">
+    tools:context=".ArtistListFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_playlist"
-        android:layout_height="match_parent"
+        android:id="@+id/rv_artistlist"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
+        android:paddingTop="50dp"
         android:paddingBottom="50dp">
 
     </android.support.v7.widget.RecyclerView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addPlaylist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_add_white_36dp"
-        android:layout_margin="16dp" />
 </android.support.design.widget.CoordinatorLayout>
